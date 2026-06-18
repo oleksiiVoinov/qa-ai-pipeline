@@ -10,6 +10,19 @@ a human controller standing between the steps.
 
 _Repository: `qa-ai-pipeline` · Project code name: **Shiva**._
 
+## Quick start
+
+Just address Shiva with a ticket (any spelling — `Shiva` / `Шива` / `Шіва`):
+
+```
+Shiva https://superunlimited.atlassian.net/browse/AB-1234
+шива AB-1234
+```
+
+That fires the entry-point skill (`shiva-run`, `skills/00-shiva-run/`), which runs
+the default chain with human checkpoints. It does NOT auto-run skill 8 (autotests)
+and never touches the automation repo unless you explicitly ask.
+
 ## Principle
 
 - One skill = one narrow area of responsibility.
@@ -35,10 +48,9 @@ _Repository: `qa-ai-pipeline` · Project code name: **Shiva**._
 5. PR Summary — a navigation map of the PR (local project + git).
 6. Code review — reconciling test cases with the code (PASS/FAIL/QA/N-A).
 7. Impact Analysis — regression risk zones.
-8. Test Selection — recommending autotest classes by risk zone (Android-automation-test repo).
+8. Test Selection — recommending autotest classes by risk zone. **Opt-in**: runs only on an explicit autotest-recommendation request, NOT on a generic ticket run; reads `Android-automation-test` lazily (only when this step runs).
 9. Testomatio Export — uploading cases into a new suite for the ticket (link to Jira, marking manual/auto).
-10. Localize Run — optional translated copy of the run (`runs/<TICKET>-RU/` etc.), driven by `RUN_LANGUAGE` in `standards/config.md`.
-11. Manual checks — human.
+10. Manual checks — human.
 
 The ordering is strict, but the skills can be used partly independently.
 
@@ -50,8 +62,9 @@ The ordering is strict, but the skills can be used partly independently.
   skill 9 creates a suite and uploads cases — a write operation, with confirmation).
 - **GitHub Integration or the project folder** — for the code skills (5-7): access to
   the `vpn-super-android` repository (see below).
-- **The `Android-automation-test` folder** — for skill 8 (autotest recommendation):
-  access to the autotest repository.
+- **The `Android-automation-test` folder** — only for skill 8 (autotest
+  recommendation), and only when you explicitly ask for that step. Do NOT connect it
+  for a normal ticket run; skill 8 requests it lazily when it actually runs.
 
 ## How to run
 
@@ -79,18 +92,15 @@ reinstall it in Capabilities. The installed copy is the "compiled"
 version, we don't touch it by hand; the repository is the source of truth.
 
 ### Language of the artifacts
-All artifacts are produced in **English** (source of truth). For a localized
-reading copy, set `RUN_LANGUAGE` in `standards/config.md` (`Russian` / `Ukrainian`);
-skill 10 then creates `runs/<TICKET>-RU/` (or `-UK/`) translated from the English
-artifacts. Empty `RUN_LANGUAGE` → no localized copy. Localized copies live under
-`runs/` and are git-ignored.
+All artifacts are produced in **English** only.
 
 ## Status
 
-All 10 skills (1-10) + manual checks (step 11 — human) are ready. The full chain
-ticket → context → requirements review → checklist → test cases → PR Summary →
-code review → impact analysis → autotest recommendation → Testomatio export →
-localize run has been verified against golden references in `golden/` (paper skills
-1-4 — on 3 tickets; code skills 5-7 — on live code of the `AB-3003-Streaks` branch;
-skill 8 — on the live `Android-automation-test` repo). The project is in English;
-optional localized run copies via `RUN_LANGUAGE`.
+Ready: entry point `shiva-run` (skill 0) + skills 1-9 + manual checks (human).
+Skill 8 (Test Selection) is opt-in: it runs only on an explicit request and reads
+the automation repo lazily, so a normal ticket run never touches the automation
+framework. The chain ticket → context → requirements review → checklist → test
+cases → PR Summary → code review → impact analysis → Testomatio export has been
+verified against golden references in `golden/` (paper skills 1-4 — on 3 tickets;
+code skills 5-7 — on live code of the `AB-3003-Streaks` branch; skill 8 — on the
+live `Android-automation-test` repo). All artifacts are English only.

@@ -4,9 +4,10 @@ description: >-
   Automated-test recommendation for an Android VPN Jira ticket (project AB):
   which existing Appium/TestNG test classes to run for the changes and risk
   areas. Maps the impact analysis/PR to classes in the Android-automation-test
-  repository and provides run commands. Use at the end of the chain, before
-  manual checks. Triggers: "which automated tests to run", "recommend tests
-  AB-XXXX", "regression set for the ticket", "what automated tests to run".
+  repository and provides run commands. Run ONLY when explicitly asked for an
+  autotest recommendation — never as part of a generic "run the ticket". Triggers:
+  "recommend automated tests for AB-XXXX", "which autotest classes to run",
+  "regression selection for the ticket".
 ---
 
 # Skill 8 — Automated-test recommendation
@@ -16,12 +17,24 @@ on the ticket's changes and risk areas, recommend which **existing** automated
 test classes to run, and produce run commands. You do NOT write new tests and do
 NOT run them (a device/Appium/keys are required) — you only select the set.
 
-## Access
+## Activation (important)
 
-The `Android-automation-test` automation repository is needed. If it is not
-available in the session — **request access to the folder** and wait for it to
-connect. Read-only. See `standards/automation-repo.md` (structure, mapping
-signals, commands).
+This skill is **opt-in**, not part of the default ticket run. Run it ONLY when the
+user explicitly asks for an autotest recommendation / regression selection.
+
+- A generic "run the ticket through Shiva" does NOT activate this skill. The
+  default chain is 1-7 → 9 (export) → manual checks. Test-selection is a separate,
+  explicitly-requested step.
+- Do NOT open, read, or request the automation repo at any other time. Connecting
+  the automation framework up-front is what made earlier sessions assume the user
+  wanted to *execute* tests — avoid that.
+
+## Access (lazy — only inside this skill)
+
+Read the `Android-automation-test` repo ONLY when this skill actually runs.
+If it is not connected at that point — **request access to the folder then** and
+wait for it to connect. Never expect it pre-connected. Read-only. See
+`standards/automation-repo.md` (structure, mapping signals, commands).
 
 ## Repository freshness
 

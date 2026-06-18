@@ -16,6 +16,22 @@ not provided) — act as follows:
 5. You may proceed without the source **only if the user explicitly allowed it** —
    and in that case mark the result as "obtained without <source>, requires verification."
 
+## Use the right tool per source (do this BEFORE concluding "unavailable")
+
+The sandbox shell (bash/curl) has NO credentials or network for Google/Atlassian —
+HTTP fetch will fail. That failure does NOT mean the source is unavailable. Always
+use the authorized MCP connector:
+
+- **Google Sheet / Drive doc** → Google Drive connector `read_file_content`
+  (by fileId from the URL, e.g. `14rY26w-...`). NOT curl/wget/HTTP in bash.
+- **Confluence page** → Atlassian `getConfluencePage` (by pageId). NOT bash HTTP.
+- **Jira ticket** → Atlassian `getJiraIssue` / `searchJiraIssuesUsingJql`.
+- **Repo code** → git on the connected repo (read-only).
+
+Only after the proper connector itself fails (no access / not connected) do you
+fall back to the "Stop and ask the user" steps below. Never silently swap the
+source of truth for a surrogate (e.g. code) because a bash HTTP attempt failed.
+
 ## Why
 
 Silent degradation yields a confident but incomplete/incorrect result. This is especially dangerous

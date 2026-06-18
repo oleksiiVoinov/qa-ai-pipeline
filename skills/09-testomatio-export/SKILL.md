@@ -15,9 +15,8 @@ generated test cases to Testomatio — create a suite for the ticket and add the
 cases into it so they can be executed (including manually). You do not rewrite the
 case contents — you transfer them as is.
 
-**Language: always English.** Cases are exported in English regardless of
-`RUN_LANGUAGE` — Testomatio is kept in a single language for the international team.
-`RUN_LANGUAGE` only affects the local run copy (skill 10), never the export.
+**Language: always English.** All artifacts and Testomatio cases are English only —
+a single language for the international team.
 
 ## When to offer
 
