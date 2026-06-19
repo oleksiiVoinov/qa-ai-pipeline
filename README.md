@@ -86,6 +86,20 @@ They need access to the repository's code.
 > Alternative: a Claude Code remote session with the chosen repo via GitHub
 > Integration — then there is no need to mount the folder, the repo is available from the integration.
 
+### When the app navigation changes
+Skills 3-4 write steps using `standards/app-navigation-map.md`, generated from the
+automation framework. When navigation changes (new screens, renamed buttons, new
+paths):
+
+1. Make sure the automation framework (`Android-automation-test`) is updated for the
+   new navigation — the map is built from it.
+2. Connect that repo to the session and `git pull` it (fresh).
+3. Tell Shiva: **`regenerate app map`** (also: "update navigation map" /
+   "rebuild app-navigation-map"). This runs the `ab-app-map` skill, which re-reads
+   the Page Objects + Navigator and rewrites `standards/app-navigation-map.md`.
+
+This is a periodic maintenance action, not part of a normal ticket run.
+
 ### Skill development rule
 You always edit a skill in this repository (`skills/<...>/SKILL.md`), then
 reinstall it in Capabilities. The installed copy is the "compiled"
