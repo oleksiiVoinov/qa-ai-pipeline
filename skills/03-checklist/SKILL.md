@@ -47,6 +47,8 @@ sources, not just the description:
 5. Attachments and links to Confluence / Google Sheet / Figma.
 
 Study `standards/checklist-pattern.md` — the team pattern (shared with skill 4).
+For screen/element names, `standards/app-navigation-map.md` is available (mainly
+used by skill 4 for steps).
 
 ## Step 2. Decompose into atomic items
 

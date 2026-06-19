@@ -60,6 +60,13 @@ priority, status). Read and account for ALL sources, not just the description:
 
 Study `standards/checklist-pattern.md` — the team pattern is recorded there.
 
+**For writing Steps, consult `standards/app-navigation-map.md`.** It maps real
+screens, elements, and navigation paths. Use it to make each step concrete and
+navigable — e.g. "Home → tap burger (Menu) → tap Settings → tap Always-On VPN",
+"Server List → choose Tab 'VIP' → select server" — using the real screen/action
+names. If the ticket's screen/element isn't in the map (a brand-new screen),
+write the step from the ticket/mockups and don't invent a fake navigation path.
+
 ## Step 2. Decompose into test cases
 
 Apply ALL rules (don't reduce the set to just the list of AC):

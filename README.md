@@ -36,7 +36,7 @@ and never touches the automation repo unless you explicitly ask.
 | ------------ | ---------------------------------------------------------------- |
 | `skills/`    | The skills themselves (one folder per skill, with `SKILL.md` inside). |
 | `templates/` | Templates for the skills' output MD files.                       |
-| `standards/` | Processing rules + distilled standards (ISTQB and internal).     |
+| `standards/` | Processing rules + distilled standards, incl. `app-navigation-map.md` (screens/elements/navigation, used by skills 3-4 to write concrete steps). |
 | `golden/`    | Golden reference tickets and expected results for quality checks. |
 
 ## Skill chain
