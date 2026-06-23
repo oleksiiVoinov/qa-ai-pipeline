@@ -41,8 +41,11 @@ and never touches the automation repo unless you explicitly ask.
 
 ## Skill chain
 
-1. Context — Jira → a single context file (source of truth).
-2. Requirements review — grooming, questions for the human.
+1. Context — Jira → a single context file (source of truth). Pulls child work items
+   and linked issues too (for Epics, the testable detail lives in the children).
+1b. Design context — Figma → screens/states/exact texts/flows. **Opt-in/lazy**: runs
+   only when the ticket has a Figma link; feeds skills 3, 4, 6.
+2. Requirements review — grooming, questions for the human (asked one at a time).
 3. Checklist — decomposing requirements into atomic checks.
 4. Test cases — generation from the checklist.
 5. PR Summary — a navigation map of the PR (local project + git).
@@ -60,6 +63,9 @@ The ordering is strict, but the skills can be used partly independently.
   (1-5). Without it the skill cannot go to the ticket.
 - **Testomatio MCP** — for working with test cases/suites (reconciling with golden references;
   skill 9 creates a suite and uploads cases — a write operation, with confirmation).
+- **Figma MCP** — only for skill 1b (design context), and only when the ticket has a
+  Figma link. Note: Dev-Mode tools may need a Dev/Full seat on the design's team;
+  screenshots/metadata usually work on a View seat.
 - **GitHub Integration or the project folder** — for the code skills (5-7): access to
   the `vpn-super-android` repository (see below).
 - **The `Android-automation-test` folder** — only for skill 8 (autotest

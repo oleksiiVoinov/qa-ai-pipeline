@@ -65,6 +65,10 @@ Run the steps in order, pausing at the human checkpoints. Each step is its own
 skill; hand off via the MD artifact.
 
 1. **Context** (skill 1) → `<TICKET>_01_context.md`.
+1b. **Design context** (skill 1b) → `<TICKET>_01b_design.md` — run **only if the
+   ticket references a Figma design**. The skill **asks you for a node-specific Figma
+   link** (ticket links are often stale) and ⏸️ waits. If the ticket has no design,
+   skip silently. Feeds screens/states/texts to skills 3, 4, 6.
 2. **Requirements review** (skill 2) → produce questions; **⏸️ pause** for the
    user's answers, then the numbered `REQ-N` list.
 3. **Checklist** (skill 3) → `<TICKET>_03_checklist.md`.
@@ -105,9 +109,11 @@ incomplete — go run impact analysis. Never end the code half on code review al
 ## Inputs Shiva needs (and how it gets them)
 
 - **Jira** via Atlassian MCP — for the ticket (always).
-- **Confluence / Google Sheet / Figma** via their connectors if the ticket links
+- **Confluence / Google Sheet** via their connectors if the ticket links
   them — pull through the proper connector, never via bash HTTP. If a source-of-truth
   is unreachable, stop and ask (see `standards/source-access-policy.md`).
+- **Figma** via the Figma MCP connector — handled by skill 1b (design context), and
+  only when the ticket has a Figma link.
 - **Repo `vpn-super-android`** — only for the code half (5-7); request the folder
   lazily then, base `dev`, read-only, fetch first (see `standards/repo-config.md`).
 

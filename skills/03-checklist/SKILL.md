@@ -48,7 +48,9 @@ sources, not just the description:
 
 Study `standards/checklist-pattern.md` — the team pattern (shared with skill 4).
 For screen/element names, `standards/app-navigation-map.md` is available (mainly
-used by skill 4 for steps).
+used by skill 4 for steps). If a design file exists (`<TICKET>_01b_design.md` from
+skill 1b), use it too: each screen state the designer drew (default/error/empty/
+loading/disabled) and each distinct UI text becomes its own checklist item.
 
 ## Step 2. Decompose into atomic items
 

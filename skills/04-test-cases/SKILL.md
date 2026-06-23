@@ -67,6 +67,13 @@ navigable — e.g. "Home → tap burger (Menu) → tap Settings → tap Always-O
 names. If the ticket's screen/element isn't in the map (a brand-new screen),
 write the step from the ticket/mockups and don't invent a fake navigation path.
 
+**If a design file exists (`<TICKET>_01b_design.md` from skill 1b), use it for the
+NEW screens/states this ticket introduces.** Take the exact CTA/labels/error texts
+verbatim from it (drive exact-text and localization checks), and turn every drawn
+state (default/error/empty/loading/disabled) into its own case. The navigation map
+is the *existing* app; the design file is *this ticket's* new/changed UI — they
+complement each other. Don't invent texts/states not present in either source.
+
 ## Step 2. Decompose into test cases
 
 Apply ALL rules (don't reduce the set to just the list of AC):
