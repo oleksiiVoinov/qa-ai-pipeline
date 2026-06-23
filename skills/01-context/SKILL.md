@@ -34,7 +34,8 @@ flag what is clearly missing.
 
 Via the Atlassian MCP (`getJiraIssue`), cloudId `superunlimited.atlassian.net`,
 `responseContentFormat: markdown`. Fields: summary, description, status, issuetype,
-priority, labels, components, assignee, reporter, comment, attachment.
+priority, labels, components, assignee, reporter, comment, attachment, **subtasks,
+issuelinks** (the last two feed Step 1b — children and linked issues).
 
 Collect:
 - All system fields (type, priority, status, labels, components, assignee/reporter).
@@ -45,6 +46,31 @@ Collect:
 - All comments (author + date + text). In particular, preserve in full the dev blocks
   "What's Done" / "What to Test" / "Impacted Areas" and Q&A discussions.
 - The list of attachments (name, type, link).
+
+## Step 1b. Child work items & linked issues (do NOT skip)
+
+A ticket is rarely self-contained. The real requirements, edge cases, and known
+bugs often live in its **children and linked issues**, not in the ticket body.
+Always pull them:
+
+1. **Children / sub-tasks.** If the ticket is an **Epic** (or any issue that has
+   children), fetch every child via JQL `searchJiraIssuesUsingJql`:
+   `parent = <KEY> ORDER BY created ASC` (fields: summary, status, issuetype,
+   description, comment). For an Epic this is mandatory — the Epic body is just the
+   pitch; the testable detail is in the Stories/Tasks/Bugs underneath.
+2. **Linked issues.** Read the `issuelinks` field (`getJiraIssue` with
+   `fields: ["issuelinks","subtasks"]`) — "relates to", "is blocked by",
+   "causes", "duplicates". Linked **Bugs** are especially valuable: they are
+   ready-made negative test cases and regressions (e.g. a "X is enabled by default"
+   bug = a test on the default state).
+3. For each child/linked issue, capture: key, type (Story/Task/Sub-task/**Bug**),
+   status, summary, and any description/STR/AC. Bugs: carry over the STR / AR / ER
+   verbatim.
+
+Record all of them in a dedicated **"Child & linked work items"** section of the
+context file (with links). Flag which ones carry testable requirements vs. which are
+pure dev/research tasks. Do not merge their content into the Epic's AC silently —
+keep the source (which child) attached, so skills 3/4 can trace each check.
 
 ## Step 2. Related sources
 
@@ -99,6 +125,9 @@ work from it alone, without reopening Jira.
 - Are all AC carried over verbatim and numbered?
 - Are all reference tables (events/props/JSON) preserved in full?
 - Are all substantive comments and dev blocks in place?
+- **For an Epic: are ALL child work items pulled (JQL `parent = <KEY>`)? Are linked
+  Bugs captured with their STR/AR/ER?** If the ticket has children and the context
+  has no "Child & linked work items" section — you skipped Step 1b, go back.
 - Are attachments and related docs listed?
 - Is nothing rephrased or invented?
 - Are gaps recorded as facts, without analysis?

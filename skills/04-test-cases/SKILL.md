@@ -114,6 +114,14 @@ sense for this feature. If unsure — move it to the raw requirements section.
 - **Carry over numbers and boundary values exactly** (≥1 connection;
   3/5/10/20/50/100 days; limits, timeouts).
 - Each test is atomic: one check = one case.
+- **Every case is self-contained — never reference another case's steps.** A step
+  must NOT say "perform the steps of TC-X", "see <other case>", "repeat steps 1-4
+  from the previous case", or point to another case's step list. Write the full,
+  explicit steps in each case so it can be executed on its own. If several cases
+  share a starting state, express it as a short **precondition** (one line, e.g.
+  "Precondition: VPN connected via SuperProto"), not as a pointer to another case's
+  Steps. Cross-references belong only in the Source field (the requirement), never
+  inside Steps or Expected result.
 
 ## Step 4. Output format
 
@@ -148,15 +156,23 @@ for import into Testomatio.
 - Are the decomposition rules applied (data, placements, entry points)?
 - Is the terminology nowhere rephrased?
 - Are all raw requirements moved out, not invented?
+- **Is every case self-contained?** Scan all Steps/Expected for references to other
+  cases ("see TC-X", "steps from…", "repeat steps…"). If found — inline the real
+  steps; shared state goes into a one-line precondition instead.
 - Volume guideline: sparse AC + a rich dev comment ≈ 15-20 tests;
   an events/props table ≈ 30; a rich BDD ticket ≈ 50. If a large ticket
   yielded 5-6 cases — you under-decomposed, go back to Step 2.
 
-## After delivery — offer export
+## After delivery — offer Testomatio export
 
-When the test cases are ready and the human has accepted them, **offer to push them to Testomatio**
-as a new suite for the ticket (skill 9 `ab-testomatio-export`). If they agree — run the
-export and return links to the suite and the cases.
+When the test cases are ready and the human has accepted them, **offer to export them
+to Testomatio** as a new suite for the ticket (skill 9 `ab-testomatio-export`). If they
+agree — run the export and return links to the suite and the cases.
+
+This is the ONLY follow-up you may offer. Do NOT offer any git action: never propose to
+commit, push, open a PR, or otherwise write to any repository. Shiva is read-only on git —
+"export to Testomatio" is a Testomatio API write, not a git push. The MD artifact is just
+saved as a file; nothing is committed.
 
 ## Model
 

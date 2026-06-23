@@ -60,11 +60,29 @@ incomplete.
 - **Gaps** — missing AC, events, texts, error handling.
 - **Raw requirements** — `need more info`.
 
-## Stage 1 — output and pause
+## Stage 1 — ask the questions ONE AT A TIME (interactive)
 
-Give the human a structured list (template `templates/requirements.md`,
-sections "Questions", "Contradictions", "Gaps") and **stop**. Don't move on to
-the final list until the human has answered. This is a human-in-the-loop point.
+Do NOT dump all questions at once. Walk the human through them one by one, like a
+real grooming chat:
+
+1. First, state how many questions you have and give a one-line scope, e.g.
+   "I have 3 questions on this ticket. Let's go one at a time."
+2. Ask **question 1 only** — the question itself, why it matters (what's blocked
+   without it), and 2-3 suggested answer options where useful. Then **STOP and wait**.
+3. Only after the human answers question 1, ask **question 2**. Then wait. And so on.
+4. Never ask the next question before the previous one is answered. Never batch or
+   number-list all questions in a single message.
+5. If an answer opens a new sub-question, ask it before moving on, then continue.
+
+Keep a running tally visible ("Question 2 of 3"). After the last question is
+answered, write the structured Stage-1 record (template `templates/requirements.md`,
+sections "Questions" with the answers captured, "Contradictions", "Gaps") to the
+artifact, then proceed to Stage 2.
+
+Contradictions and gaps that are NOT questions for the human can be listed together
+in one message (they don't need answers) — but anything that needs a human decision
+goes through the one-at-a-time flow above. This whole stage is a human-in-the-loop
+point: do not start the final `REQ-N` list until every question is answered.
 
 ## Stage 2. Final numbered list of requirements
 
@@ -96,6 +114,7 @@ This file is the input for skills 3 and 4 (alongside the context).
 
 - Has each requirement been run through the 4 questions?
 - Are the questions concrete and addressed to a human, not rhetorical?
+- Were questions asked ONE AT A TIME (not dumped as a list), each awaiting an answer?
 - Are contradictions quoted from both sides?
 - Is the final list hard-numbered and atomic?
 - Are open items flagged, not second-guessed?
