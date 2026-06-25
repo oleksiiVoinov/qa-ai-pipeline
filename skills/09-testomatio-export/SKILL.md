@@ -54,9 +54,11 @@ value:"AB-XXXX", action:"add"}`). Record the returned `suite_id`.
 
 ### Step 4. Create the cases
 For each test case `tests_create`:
-- `title` — the case heading (verbatim).
+- `title` — the case heading (verbatim), prefixed with its traceability ID, e.g.
+  `TC-REQ-2.1 — <title>`, so the chain to the requirement survives in Testomatio.
 - `suite_id` — from step 3.
-- `description` — the body in your format: `### Requirements` / `### Steps` /
+- `description` — start with the traceability line (`TC-REQ-2.1 → REQ-2.1 → REQ-2`),
+  then the body in your format: `### Requirements` / `### Steps` /
   `### Expected result` (as in the Testomatio reference cases).
 - `state` — `manual`.
 - `priority` — from the case (default `normal`).

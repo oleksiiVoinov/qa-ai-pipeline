@@ -4,11 +4,13 @@
 
 ## Coverage (traceability)
 
-| # | Test | Source | Type |
-| --- | --- | --- | --- |
-| 1 | <test title> | AC-2 / event X / comment | functional / negative / data / localization / analytics |
+| Test ID | Test | Checklist item | Requirement | Type |
+| --- | --- | --- | --- | --- |
+| TC-REQ-2.1 | <test title> | REQ-2.1 | REQ-2 | functional / negative / data / localization / analytics |
 
-<!-- The coverage table is a "what comes from where" map. Every test below must be in it. -->
+<!-- Full chain: TC-REQ-2.1 → REQ-2.1 (checklist) → REQ-2 (requirement) → AC/source.
+     Every test below must be in this table. If there is no REQ-N list (built straight
+     from the ticket), use AC IDs: TC-AC-2.1 → AC-2.1 → AC-2. -->
 
 ---
 
@@ -16,8 +18,9 @@
 
 ### <Group / Suite, e.g. UI / Events / Logic>
 
-#### <Test title — short, to the point of the check>
+#### TC-REQ-2.1 — <Test title, short, to the point of the check>
 
+**Traceability:** TC-REQ-2.1 → REQ-2.1 → REQ-2
 **Source:** <AC-N / event / comment / doc — verbatim reference>
 
 ### Requirements

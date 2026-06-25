@@ -27,6 +27,9 @@ and never touches the automation repo unless you explicitly ask.
 
 - One skill = one narrow area of responsibility.
 - Data travels between skills via MD files, not through the chat context.
+- End-to-end traceability by ID: requirement `REQ-2` → checklist item `REQ-2.1` →
+  test case `TC-REQ-2.1` → code-review verdict → Testomatio case. Any artifact traces
+  straight back to its requirement.
 - Hard rules: tie to a quote, no guessing allowed, preserve the
   original wording. We make errors visible rather than forbidding them.
 

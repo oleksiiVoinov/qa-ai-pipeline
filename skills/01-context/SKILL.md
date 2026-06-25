@@ -37,6 +37,12 @@ Via the Atlassian MCP (`getJiraIssue`), cloudId `superunlimited.atlassian.net`,
 priority, labels, components, assignee, reporter, comment, attachment, **subtasks,
 issuelinks** (the last two feed Step 1b — children and linked issues).
 
+**Use `standards/jira-field-map.md`** — it maps each Jira field (and the
+sub-structures inside `description`: AC tables, events table, feature-flag block,
+Figma/Confluence links, dev "What to Test / Impacted Areas" blocks) to the context
+section it belongs in, and explains how to resolve custom fields (`expand: "names"`).
+Follow it so nothing is dropped.
+
 Collect:
 - All system fields (type, priority, status, labels, components, assignee/reporter).
 - The full description.

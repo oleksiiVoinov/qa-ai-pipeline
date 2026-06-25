@@ -76,7 +76,9 @@ better than a false PASS.
 - Do not guess the implementation from names; read the code.
 - Do not rephrase the case's terms; verify exactly the stated values (events,
   flag keys, boundary numbers).
-- Preserve the numbering/binding of the cases from the input file.
+- Preserve the cases' traceability IDs from the input file (`TC-REQ-N.M`). Report
+  each result by its ID so a FAIL/QA traces straight back to its requirement
+  (`TC-REQ-2.1 → REQ-2.1 → REQ-2`) — that's the point of the chain.
 - Do not propose code fixes — only the status and evidence (refactoring is not your job).
 
 ## Output format

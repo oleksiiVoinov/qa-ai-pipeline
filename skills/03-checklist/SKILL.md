@@ -69,6 +69,16 @@ One item = one atomic check. The statement is a short assertion of
 what should be true (e.g.: "the 0-day popup contains a Connect button
 and an X close icon", "the `streaks_broken` event is sent after a streak reset").
 
+### Traceability IDs (mandatory)
+
+Give every checklist item a nested ID tied to its parent requirement:
+`REQ-<N>.<M>` — item M decomposed from requirement `REQ-N` (from skill 2). Items of
+the same requirement share the prefix: `REQ-2.1`, `REQ-2.2`, `REQ-2.3`. If there is
+no `REQ-N` list (you're working straight from the ticket), use the AC number instead:
+`AC-<N>.<M>`. This ID is what skill 4 turns into `TC-REQ-N.M` and what lets anyone
+trace a test case → checklist item → requirement → source. Keep the `_(source: …)_`
+note as well — the ID is the chain, the source is the origin.
+
 ### Cross-cutting checks — add if applicable
 
 Localization in all languages; feature flag OFF = full disable; country-gated flag;
@@ -93,7 +103,7 @@ Use the template `templates/checklist.md`. Structure:
 
 - Coverage table (item → source).
 - Checklist, grouped by logical blocks (UI / Logic / Events / Data /
-  Localization), items in the format `- [ ] <check> _(source: ...)_`.
+  Localization), items in the format `- [ ] **REQ-N.M** <check> _(source: ...)_`.
 - A "Raw / unclear requirements" section.
 - A self-check list for cross-checks.
 
@@ -108,6 +118,7 @@ This is a standalone artifact AND the input for skill 4.
 - Is the terminology nowhere rephrased?
 - Are raw requirements moved out, not invented?
 - Is each item atomic (one check)?
+- Does each item carry a `REQ-N.M` (or `AC-N.M`) ID tied to its parent requirement?
 
 ## When a checklist is enough, and when to go to test cases
 

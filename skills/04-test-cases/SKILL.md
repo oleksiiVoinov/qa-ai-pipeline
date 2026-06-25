@@ -112,8 +112,13 @@ sense for this feature. If unsure — move it to the raw requirements section.
   (`vpn_connection_failed`), props (`auto_renew_status`), flags
   (`feature_ab_3003_streaks`), values (ISO-2, `YYYY-MM-DD`, `weekly/monthly`),
   screen and button names — copy exactly. "Generalizing for brevity" is forbidden.
-- **Link each test to a source** (AC-N / event / comment / doc)
-  in the Source field.
+- **Give every test case a traceability ID and link it to a source.** The ID is
+  `TC-REQ-<N>.<M>` — the test that covers checklist item `REQ-N.M` (from skill 3). If
+  the case adds a second test for the same checklist item, suffix it: `TC-REQ-2.1a`,
+  `TC-REQ-2.1b`. If there's no checklist/REQ chain (built straight from the ticket),
+  use `TC-AC-<N>.<M>`. Show the full chain in each case (`TC-REQ-2.1 → REQ-2.1 →
+  REQ-2`) and keep the verbatim Source field too. This end-to-end ID is what makes
+  every case traceable back to its requirement in code review and Testomatio.
 - **Don't invent raw requirements.** If a requirement is incomplete/unclear —
   do NOT make up steps. Move it to the "Raw / unclear requirements" section with a
   concrete question for a human and a `need more info` flag
@@ -135,7 +140,8 @@ sense for this feature. If unsure — move it to the raw requirements section.
 Use the template `templates/test-cases.md`. Each case:
 
 ```
-#### <Title — short, to the point of the check>
+#### TC-REQ-N.M — <Title, short, to the point of the check>
+**Traceability:** TC-REQ-N.M → REQ-N.M → REQ-N
 **Source:** <link to the source>
 
 ### Requirements
@@ -149,7 +155,8 @@ Use the template `templates/test-cases.md`. Each case:
 ```
 
 Group the cases by logical suite (UI / Logic / Events / Data / Localization).
-At the top of the file, fill in the coverage table (test → source traceability).
+At the top of the file, fill in the coverage table with the full chain
+(Test ID → checklist item → requirement → source).
 At the end — the raw requirements section and a self-check list for cross-checks.
 
 Save the result to an MD file named `<TICKET>_04_test-cases.md`
@@ -163,6 +170,7 @@ for import into Testomatio.
 - Are the decomposition rules applied (data, placements, entry points)?
 - Is the terminology nowhere rephrased?
 - Are all raw requirements moved out, not invented?
+- Does every case have a `TC-REQ-N.M` ID and show the full chain to its requirement?
 - **Is every case self-contained?** Scan all Steps/Expected for references to other
   cases ("see TC-X", "steps from…", "repeat steps…"). If found — inline the real
   steps; shared state goes into a one-line precondition instead.
