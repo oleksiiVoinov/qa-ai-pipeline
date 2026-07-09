@@ -107,7 +107,9 @@ Use the template `templates/checklist.md`. Structure:
 - A "Raw / unclear requirements" section.
 - A self-check list for cross-checks.
 
-Save to an MD file `<TICKET>_03_checklist.md` (e.g. `AB-3107_03_checklist.md`).
+Save to `runs/<TICKET>/<TICKET>_03_checklist.md` inside the connected `qa-ai-pipeline`
+project folder (create the folder if needed; not a temp folder) — e.g.
+`runs/AB-3107/AB-3107_03_checklist.md`.
 This is a standalone artifact AND the input for skill 4.
 
 ## Step 5. Self-check
@@ -125,6 +127,14 @@ This is a standalone artifact AND the input for skill 4.
 - Small/simple ticket, clear checks → a checklist is enough, test cases can be skipped.
 - Large ticket, complex flows, step detail needed, import into Testomatio →
   pass this checklist as input to skill 4.
+
+## Language (RUN_LANG)
+
+Write the checklist in **RUN_LANG** (recorded in the context file header; see skill 0).
+Generate directly in that language in one pass — never write English then translate,
+never make a duplicate language copy. Keep technical tokens verbatim (event/flag/ID/
+screen names, `REQ-N.M`). Only test cases (skill 4) and Testomatio (skill 9) are
+always English.
 
 ## Model
 

@@ -1,4 +1,6 @@
 .idea/
 .DS_Store
 *.log
-runs/
+# Run artifacts are local-only (not committed), but keep the folder present on clone
+runs/*
+!runs/.gitkeep

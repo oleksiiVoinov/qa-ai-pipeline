@@ -89,7 +89,9 @@ end PASS, collapsed into `<details>`. This way the tester immediately sees the
 work, not green noise. For each FAIL and N/A an explanation is mandatory; each
 PASS — with a reference to the code.
 
-Save to `<TICKET>_06_code-review.md`. Input for manual checks (the final step):
+Save to `runs/<TICKET>/<TICKET>_06_code-review.md` inside the connected
+`qa-ai-pipeline` project folder (create the folder if needed; not a temp folder).
+Input for manual checks (the final step):
 the human finishes off FAIL, N/A, and all QA items.
 
 ## Self-check
@@ -98,6 +100,15 @@ the human finishes off FAIL, N/A, and all QA items.
 - Is there an explanation for every FAIL and N/A?
 - Are disputable cases / cases not visible in the code marked QA, not PASS?
 - Are values (events, flags, numbers) verified verbatim, not "by meaning"?
+
+## Language (RUN_LANG)
+
+Write the review in **RUN_LANG** (recorded in the context file header; see skill 0).
+Generate directly in that language in one pass — never write English then translate.
+Note: the test cases you check are in English (skill 4) and their IDs/titles stay as
+they are; your verdicts and explanations are in RUN_LANG. Keep technical tokens
+verbatim (code paths, symbols, event/flag names, `TC-REQ-N.M`). Only test cases
+(skill 4) and Testomatio (skill 9) are always English.
 
 ## Model
 

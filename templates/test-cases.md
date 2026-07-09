@@ -18,24 +18,36 @@
 
 ### <Group / Suite, e.g. UI / Events / Logic>
 
-#### TC-REQ-2.1 — <Test title, short, to the point of the check>
+#### TC-REQ-2.1 [Component] [Type] <action — short outcome>
 
 **Traceability:** TC-REQ-2.1 → REQ-2.1 → REQ-2
 **Source:** <AC-N / event / comment / doc — verbatim reference>
+**Variant:** <Social / Native / Both — omit if no A/B variants>
 
-### Requirements
-- <precondition: user type, feature/flag state, test data>
+### Requirements (system setup)
+- Feature flag `<flag_name>` enabled / disabled
+- Charles Proxy: <endpoint + HTTP status, if needed>
+- Firebase DebugView: `adb shell setprop debug.firebase.analytics.app com.free.vpn.super.hotspot.open` (if events)
+
+### Pre-conditions (user / device state)
+- User: <Free / Premium / trial / logged-out / secondary device>
+- <screen/flow state before the test starts>
 
 ### Steps
-1. <step>
-2. <step>
+1. <atomic step>
+2. <atomic step>
 
 ### Expected result
-<expected result — verbatim values from the ticket>
+- <observable outcome — verbatim values; event fires / does not fire>
+
+**Type:** Functional | Negative | UI | API | E2E · **Priority:** High | Normal | Low
 
 ---
 
-<!-- Repeat the block for each case. Group by logical suite. -->
+<!-- Repeat the block for each case. Group by logical suite.
+     Title tags for grouping: [Entry Point] [Happy Path] [Error] [Event] [Offline]
+     [Localization] [E2E]; type [Event]/[API]/[UI]; A/B: [Social]/[Native]/[Both].
+     Always include an [E2E] group (journeys by phases). -->
 
 ## Raw / unclear requirements (NOT invented)
 

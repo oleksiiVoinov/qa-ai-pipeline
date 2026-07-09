@@ -1,6 +1,7 @@
 # Context — <TICKET-KEY> <Title>
 
 > Source of truth for skills 2-4 · Collected: <date> · Source: <ticket link>
+> Run language: <English / Russian / Ukrainian — RUN_LANG, inherited by all steps>
 
 ## Metadata
 

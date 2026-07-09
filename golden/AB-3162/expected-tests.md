@@ -1,7 +1,54 @@
 # AB-3162 — reference test set (Testomatio: CleverTap, 30)
 
-Format: **Title** + `### Requirements` + `### Steps` + `### Expected result`.
+Format (updated): title = `TC-REQ-N.M [Component] [Type] <action — outcome>`, then
+`### Requirements (system setup)` + `### Pre-conditions (user/device)` + `### Steps`
++ `### Expected result` + `Type/Priority`. Full card shape in `templates/test-cases.md`.
 Pattern: each event = a test, each prop (or group) = a test, plus SDK behavior.
+Events coverage rule: ≤20 → one test per event; >20 → group by screen (5-6), list all
+names in Expected. Always add an `[E2E]` group; apply `standards/android-test-checklist.md`.
+
+## Example cards in the new format (built only from this ticket's data)
+
+```
+#### TC-REQ-4.1 [Event] paywall_viewed fires with screen_name + source
+**Traceability:** TC-REQ-4.1 → REQ-4.1 → REQ-4
+**Source:** Custom Events table
+
+### Requirements (system setup)
+- CleverTap SDK initialized (feature enabled for the country)
+- Firebase DebugView: `adb shell setprop debug.firebase.analytics.app com.free.vpn.super.hotspot.open`
+
+### Pre-conditions (user / device state)
+- User: Free, logged-out
+
+### Steps
+1. Open a screen that shows the paywall
+
+### Expected result
+- `paywall_viewed` fires once with params `screen_name`, `source`
+
+**Type:** Functional · **Priority:** Normal
+```
+
+```
+#### TC-REQ-2.1 [SDK] [Error] Ipinfo blocked — SDK does not initialize, no crash
+**Traceability:** TC-REQ-2.1 → REQ-2.1 → REQ-2
+**Source:** SDK init / country AC
+
+### Requirements (system setup)
+- Charles Proxy: block `ipinfo` endpoint (return error / timeout)
+
+### Pre-conditions (user / device state)
+- User: Free · fresh launch
+
+### Steps
+1. Launch the app with the ipinfo endpoint blocked
+
+### Expected result
+- The SDK does not initialize; the app does not crash
+
+**Type:** Negative · **Priority:** High
+```
 
 ## SDK init / feature flag / country (suite 16ea5673)
 

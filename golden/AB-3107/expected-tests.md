@@ -3,6 +3,10 @@
 Format: **Title** + `### Requirements` + `### Steps` + `### Expected result`.
 Many tests are data-driven: they specify a concrete server JSON object and the expected render.
 
+> Updated convention (see `templates/test-cases.md` and AB-3162): title now carries
+> `TC-REQ-N.M [Component] [Type]` tags, Requirements (system setup) split from
+> Pre-conditions (user/device), plus Type/Priority; always an `[E2E]` group.
+
 ## Data-driven by the server object structure (boundary / equivalence)
 
 - Country with value, city is empty → cluster: Country name; server: Country + number (ex. Germany - 1)

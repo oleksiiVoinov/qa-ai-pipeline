@@ -81,7 +81,9 @@ Template `templates/impact-analysis.md`. Risk areas ranked High/Medium/Low, for
 each: why it is at risk, what to recheck, whether there is automated coverage.
 Plus sections "Missed by the developer", "Claimed but not visible", "Blind spots".
 
-Save to `<TICKET>_07_impact-analysis.md`. Input for the final manual checks.
+Save to `runs/<TICKET>/<TICKET>_07_impact-analysis.md` inside the connected
+`qa-ai-pipeline` project folder (create the folder if needed; not a temp folder).
+Input for the final manual checks.
 
 ## Hard rules
 
@@ -99,6 +101,13 @@ Save to `<TICKET>_07_impact-analysis.md`. Input for the final manual checks.
 - Is what was claimed but not confirmed in manual checks, not discarded?
 - Are blind spots (runtime/config/data) explicitly named?
 - Is the conclusion risk areas, not "all good"?
+
+## Language (RUN_LANG)
+
+Write the impact analysis in **RUN_LANG** (recorded in the context file header; see
+skill 0). Generate directly in that language in one pass — never write English then
+translate. Keep technical tokens verbatim (code paths, symbols, module/flag names).
+Only test cases (skill 4) and Testomatio (skill 9) are always English.
 
 ## Model
 

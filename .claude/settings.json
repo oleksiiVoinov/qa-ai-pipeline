@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__testomatio__*"
+    ],
+    "deny": [
+      "mcp__testomatio__tests_delete",
+      "mcp__testomatio__suites_delete",
+      "mcp__testomatio__steps_delete",
+      "mcp__testomatio__runs_delete",
+      "mcp__testomatio__testruns_delete",
+      "mcp__testomatio__plans_delete",
+      "mcp__testomatio__labels_delete",
+      "mcp__testomatio__issues_delete",
+      "mcp__testomatio__requirements_delete",
+      "mcp__testomatio__snippets_delete",
+      "mcp__testomatio__rungroups_delete",
+      "mcp__testomatio__suites_attachments_delete",
+      "mcp__testomatio__tests_attachments_delete",
+      "mcp__testomatio__testruns_attachments_delete"
+    ]
+  }
+}

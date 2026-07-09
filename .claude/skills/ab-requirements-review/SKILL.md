@@ -106,7 +106,9 @@ After the human answers, assemble a single list of requirements:
 
 ## Output format
 
-Template `templates/requirements.md`. Save to `<TICKET>_02_requirements.md`.
+Template `templates/requirements.md`. Save to
+`runs/<TICKET>/<TICKET>_02_requirements.md` inside the connected `qa-ai-pipeline`
+project folder (create the folder if needed; not a temp folder).
 Stage 1 fills the upper sections; Stage 2 — the final `REQ-N` list.
 This file is the input for skills 3 and 4 (alongside the context).
 
@@ -118,6 +120,14 @@ This file is the input for skills 3 and 4 (alongside the context).
 - Are contradictions quoted from both sides?
 - Is the final list hard-numbered and atomic?
 - Are open items flagged, not second-guessed?
+
+## Language (RUN_LANG)
+
+Write this artifact (and ask the questions) in **RUN_LANG** (recorded in the context
+file header; see skill 0). Generate directly in that language in one pass — never
+write English then translate, never make a duplicate language copy. Keep technical
+tokens verbatim (event/flag/ID/screen names, `REQ-N`). Only test cases (skill 4) and
+Testomatio (skill 9) are always English.
 
 ## Model
 

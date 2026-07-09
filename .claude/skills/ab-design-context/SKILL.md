@@ -118,7 +118,8 @@ These become questions for skill 2 / notes for review — quote both sides.
 ## Step 4. Output format
 
 Use the template `templates/design-context.md`. Save to
-`<TICKET>_01b_design.md`. Structure:
+`runs/<TICKET>/<TICKET>_01b_design.md` inside the connected `qa-ai-pipeline` project
+folder (create the folder if needed; not a temp folder). Structure:
 - **Source**: file key, page, node-ids, the Figma link(s), source language.
 - **Screens**: one block per screen — name, node-id, screenshot reference, states,
   verbatim texts, elements, navigation.
@@ -137,6 +138,14 @@ is the *existing* app from automation; this file is *this ticket's* new/changed 
 - Is the copy verbatim (not paraphrased)?
 - Are design-vs-ticket discrepancies recorded as facts, not resolved?
 - Are inaccessible frames flagged, not invented?
+
+## Language (RUN_LANG)
+
+Write the doc prose in **RUN_LANG** (recorded in the context file header; see skill 0),
+in one pass — never write English then translate. **Texts captured from Figma (CTA
+copy, labels, error strings) are kept VERBATIM in their source language** — never
+translate the design's copy; it drives exact-text and localization checks. Only test
+cases (skill 4) and Testomatio (skill 9) are always English.
 
 ## Model
 

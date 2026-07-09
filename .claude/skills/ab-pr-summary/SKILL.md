@@ -109,7 +109,9 @@ about where to look more carefully during code review.
 
 ## Output format
 
-Template `templates/pr-summary.md`. Save to `<TICKET>_05_pr-summary.md`.
+Template `templates/pr-summary.md`. Save to
+`runs/<TICKET>/<TICKET>_05_pr-summary.md` inside the connected `qa-ai-pipeline`
+project folder (create the folder if needed; not a temp folder).
 This is input for skill 6 (code review) and skill 7 (impact analysis).
 
 ## Self-check
@@ -119,6 +121,13 @@ This is input for skill 6 (code review) and skill 7 (impact analysis).
 - Did all changed files make it into the map and get grouped?
 - Are endpoints/migrations/configs/flags called out separately?
 - Only facts from the diff, no guesses about intent?
+
+## Language (RUN_LANG)
+
+Write the PR summary in **RUN_LANG** (recorded in the context file header; see skill 0).
+Generate directly in that language in one pass — never write English then translate.
+Keep technical tokens verbatim (file paths, class/function names, flags, `REQ`/`TC`
+IDs). Only test cases (skill 4) and Testomatio (skill 9) are always English.
 
 ## Model
 

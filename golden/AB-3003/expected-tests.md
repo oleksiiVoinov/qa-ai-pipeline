@@ -2,6 +2,11 @@
 
 Format of each test: **Title** + `### Requirements` (preconditions) + `### Steps` (numbered) + `### Expected result`.
 
+> Updated convention (see `templates/test-cases.md` and AB-3162): title now carries
+> `TC-REQ-N.M [Component] [Type]` tags, Requirements (system setup) and Pre-conditions
+> (user/device) are separate, plus Type/Priority; always an `[E2E]` group. The listing
+> below is the expected decomposition — the new format is the card shape, not the count.
+
 ## UI / icon / popup (suite 9d487f64)
 
 - The feature icon matches the mockup

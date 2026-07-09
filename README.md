@@ -12,16 +12,42 @@ _Repository: `qa-ai-pipeline` · Project code name: **Shiva**._
 
 ## Quick start
 
-Just address Shiva with a ticket (any spelling — `Shiva` / `Шива` / `Шіва`):
+How you start a run depends on the environment:
+
+**In Cowork** — just address Shiva with a ticket (any spelling — `Shiva` / `Шива` /
+`Шіва`). The trigger fires the entry-point skill directly:
 
 ```
 Shiva https://superunlimited.atlassian.net/browse/AB-1234
 шива AB-1234
 ```
 
-That fires the entry-point skill (`shiva-run`, `skills/00-shiva-run/`), which runs
-the default chain with human checkpoints. It does NOT auto-run skill 8 (autotests)
-and never touches the automation repo unless you explicitly ask.
+**In Claude Code** — use the slash command (`.claude/commands/shiva.md`), the ticket
+is the argument:
+
+```
+/shiva https://superunlimited.atlassian.net/browse/AB-1234
+/shiva AB-1234
+```
+
+Both do the same thing: run the entry-point skill (`shiva-run`, `.claude/skills/shiva-run/`),
+which drives the default chain with human checkpoints. It never executes tests or
+touches the automation repo.
+
+Results are saved into the connected `qa-ai-pipeline` folder under
+`runs/<TICKET>/` (e.g. `runs/AB-1234/AB-1234_03_checklist.md`). The folder is created
+if missing; its contents are git-ignored (local-only), so a fresh clone starts with
+an empty `runs/`.
+
+Right after you start, Shiva shows a **step picker**: a few one-click **presets**
+(Checklist only · Cases → Testomatio · Code pack · Full run) plus **Custom**
+checkboxes (in Cowork) to tick exactly which skills to run (1, 1b, 2, 3, 4, 5, 6, 7,
+9). It runs only what you pick, always in the fixed order 1→9, and pulls in any
+upstream step a picked one depends on.
+
+> Note: the `/shiva` slash command is a Claude Code feature (needs the skills
+> available in that session). In Cowork use the `Shiva <ticket>` trigger — slash
+> commands from `.claude/commands` don't apply there.
 
 ## Principle
 
@@ -37,7 +63,8 @@ and never touches the automation repo unless you explicitly ask.
 
 | Folder       | Purpose                                                          |
 | ------------ | ---------------------------------------------------------------- |
-| `skills/`    | The skills themselves (one folder per skill, with `SKILL.md` inside). |
+| `.claude/skills/` | The skills themselves (one folder per skill = its name, with `SKILL.md` inside). This is the canonical location Cowork / Claude Code auto-discover when the folder is connected — no manual install. |
+| `.claude/commands/` | The `/shiva` slash command (Claude Code). |
 | `templates/` | Templates for the skills' output MD files.                       |
 | `standards/` | Processing rules + distilled standards, incl. `app-navigation-map.md` (screens/elements/navigation, used by skills 3-4 to write concrete steps). |
 | `golden/`    | Golden reference tickets and expected results for quality checks. |
@@ -54,7 +81,6 @@ and never touches the automation repo unless you explicitly ask.
 5. PR Summary — a navigation map of the PR (local project + git).
 6. Code review — reconciling test cases with the code (PASS/FAIL/QA/N-A).
 7. Impact Analysis — regression risk zones.
-8. Test Selection — recommending autotest classes by risk zone. **Opt-in**: runs only on an explicit autotest-recommendation request, NOT on a generic ticket run; reads `Android-automation-test` lazily (only when this step runs).
 9. Testomatio Export — uploading cases into a new suite for the ticket (link to Jira, marking manual/auto).
 10. Manual checks — human.
 
@@ -71,9 +97,6 @@ The ordering is strict, but the skills can be used partly independently.
   screenshots/metadata usually work on a View seat.
 - **GitHub Integration or the project folder** — for the code skills (5-7): access to
   the `vpn-super-android` repository (see below).
-- **The `Android-automation-test` folder** — only for skill 8 (autotest
-  recommendation), and only when you explicitly ask for that step. Do NOT connect it
-  for a normal ticket run; skill 8 requests it lazily when it actually runs.
 
 ## How to run
 
@@ -110,20 +133,31 @@ paths):
 This is a periodic maintenance action, not part of a normal ticket run.
 
 ### Skill development rule
-You always edit a skill in this repository (`skills/<...>/SKILL.md`), then
-reinstall it in Capabilities. The installed copy is the "compiled"
-version, we don't touch it by hand; the repository is the source of truth.
+Skills live in `.claude/skills/<name>/SKILL.md` — the canonical location that Cowork /
+Claude Code auto-discover when the project folder is connected. **No manual install:**
+edit the `SKILL.md`, and the change is picked up when the folder is connected (a fresh
+session/turn). Just `git pull` to get others' updates. There is no separate "installed
+copy" to keep in sync — the repo file IS what runs.
 
 ### Language of the artifacts
-All artifacts are produced in **English** only.
+Artifacts are produced in the **run language** (RUN_LANG): the language of your
+message, detected once (trigger spelling is a hint — `shiva`→EN, `шива`→RU,
+`шіва`→UA) and recorded in the context file header. So `шива <ticket>` yields
+Russian artifacts in `runs/`, `shiva <ticket>` yields English, etc.
+
+Each artifact is generated **directly in RUN_LANG in one pass** — never English-then-
+translate, never duplicate copies — so localization costs almost nothing. Technical
+tokens (event/flag/ID/screen names, `REQ`/`TC` IDs) stay verbatim in any language.
+
+**Two things are always English:** the **test cases** (skill 4) and the **Testomatio
+export** (skill 9) — cases feed Testomatio, so keeping them English means zero
+conversion at export.
 
 ## Status
 
-Ready: entry point `shiva-run` (skill 0) + skills 1-9 + manual checks (human).
-Skill 8 (Test Selection) is opt-in: it runs only on an explicit request and reads
-the automation repo lazily, so a normal ticket run never touches the automation
-framework. The chain ticket → context → requirements review → checklist → test
-cases → PR Summary → code review → impact analysis → Testomatio export has been
-verified against golden references in `golden/` (paper skills 1-4 — on 3 tickets;
-code skills 5-7 — on live code of the `AB-3003-Streaks` branch; skill 8 — on the
-live `Android-automation-test` repo). All artifacts are English only.
+Ready: entry point `shiva-run` (skill 0) + skills 1, 1b, 2-7, 9 + manual checks
+(human). The chain ticket → context → (design context) → requirements review →
+checklist → test cases → PR Summary → code review → impact analysis → Testomatio
+export has been verified against golden references in `golden/` (paper skills 1-4 —
+on 3 tickets; code skills 5-7 — on live code of the `AB-3003-Streaks` branch).
+Artifacts are in the run language; test cases and Testomatio are always English.

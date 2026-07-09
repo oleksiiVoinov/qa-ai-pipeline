@@ -32,6 +32,8 @@ flag what is clearly missing.
 
 ## Step 1. Pull the ticket from Jira
 
+**If the Atlassian (Jira) MCP is not connected**, read the ticket via the Claude-in-Chrome browser (Jira is behind login) — that is an acceptable fallback. Do NOT fetch Jira over bash HTTP, and do NOT abandon the run.
+
 Via the Atlassian MCP (`getJiraIssue`), cloudId `superunlimited.atlassian.net`,
 `responseContentFormat: markdown`. Fields: summary, description, status, issuetype,
 priority, labels, components, assignee, reporter, comment, attachment, **subtasks,
@@ -120,8 +122,11 @@ Don't draw conclusions about quality and don't propose checks — that's skill 2
 
 ## Step 5. Output format
 
-Use the template `templates/context.md`. Save to an MD file
-`<TICKET>_01_context.md` (e.g. `AB-3107_01_context.md`).
+Use the template `templates/context.md`. Save to
+`runs/<TICKET>/<TICKET>_01_context.md` inside the connected `qa-ai-pipeline` project
+folder (create `runs/<TICKET>/` if it doesn't exist) — e.g.
+`runs/AB-3107/AB-3107_01_context.md`. Not a temp/scratchpad folder; then show the
+saved path to the user.
 
 This is the source of truth — the input for skills 2, 3, 4. They must be able to
 work from it alone, without reopening Jira.
@@ -137,6 +142,16 @@ work from it alone, without reopening Jira.
 - Are attachments and related docs listed?
 - Is nothing rephrased or invented?
 - Are gaps recorded as facts, without analysis?
+
+## Language (RUN_LANG)
+
+Write the context in **RUN_LANG** (the run language — see skill 0: default from the
+user's message, hint from trigger spelling `shiva`/`шива`/`шіва`). **Record RUN_LANG
+in the context file header** (e.g. `> Run language: Russian`) so every downstream step
+inherits it without re-detecting. Generate directly in that language in one pass —
+never write English then translate. Keep technical tokens verbatim (Jira field values,
+event/flag/ID/screen names). Only test cases (skill 4) and Testomatio (skill 9) are
+always English.
 
 ## Model
 
