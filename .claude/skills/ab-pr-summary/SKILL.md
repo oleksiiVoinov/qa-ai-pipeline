@@ -35,7 +35,7 @@ git repository).
   request a folder separately.
 
 Work with the repository through file reads and git commands (bash). All git
-operations are **read-only** (`git diff`, `git log`, `git show`). Never switch
+operations are **read-only** (`git diff`, `git log`, `git show`). In Cowork there is NO callable git/GitHub connector — go straight to the connected `vpn-super-android` folder's local git, do NOT wait for a connector. NEVER checkout; resolve the branch as `origin/<branch>` and diff merge-base..origin/<branch> (see `standards/repo-config.md`). Never switch
 branches, never commit/checkout/reset/push — do not touch the working state.
 
 ## Input

@@ -24,7 +24,7 @@ because the human rechecks FAIL/N-A first and accepts PASS. Therefore the
 The `vpn-super-android` repository is needed. If it is not available in the
 session — **request access to the project folder** (directory selection) and
 wait for it to connect. Alternative — GitHub Integration in a remote session. All
-git operations are read-only.
+git operations are read-only. In Cowork there is NO callable git/GitHub connector — go straight to the connected `vpn-super-android` folder's local git, do NOT wait for a connector. NEVER checkout; resolve the branch as `origin/<branch>` and diff merge-base..origin/<branch> (see `standards/repo-config.md`).
 
 ## Clone freshness
 

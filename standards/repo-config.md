@@ -21,27 +21,42 @@ use the **merge-base** (`git merge-base origin/dev <branch>`), not the tip of `d
 
 ## Feature branch name
 
-- Taken from the ticket (dev specifies the branch in the description/comments).
-- If the ticket has no branch — the skill stops and asks a human for it.
+- Taken from the ticket (dev specifies the branch in the description/comments, or the
+  Development panel / linked PR).
+- Match the ticket key **anywhere** in the branch name, any case, with any prefix or
+  separator: `feature/AB-3122_Killswitch`, `AB-3003-Streaks`, `bugfix/ab-3330`, etc.
+  Look at both local and `origin/*` branches (`git branch -a`).
+- If no branch matches — the skill stops and asks a human for it.
 
-## Branch freshness (mandatory before diffing)
+## Access model — local-first (read the whole thing)
 
-Before any diff/trace, the code skill MUST make sure the clone is fresh:
+- **In Cowork there is NO callable git / GitHub connector.** Do not wait for one, do
+  not "try the connector then fall back." Go straight to the **connected
+  `vpn-super-android` folder** and use its local git. (GitHub Integration only gives
+  repo access in **Claude Code** sessions, not as a tool in Cowork.)
+- **Never check out the branch and never change the working tree.** All git is
+  read-only. Resolve the branch as the remote-tracking ref **`origin/<branch>`** and
+  read it directly — you do NOT need it checked out. Compute:
+  `MB=$(git merge-base origin/dev origin/<branch>)` then diff `"$MB"..origin/<branch>`,
+  and read files with `git show origin/<branch>:<path>`.
+- This is why the user does **not** need to switch branches locally — they only need
+  the branch **fetched** (their IDE usually auto-fetches, so `origin/<branch>` is
+  already present).
 
-1. Try to pull the required branches: `git fetch origin dev <feature-branch>`
-   (or `git fetch --all --prune`).
-2. **If the fetch succeeded** — work with the updated `origin/...` refs.
-3. **If the fetch failed** (no credentials/network — typical for a sandbox without GitHub access):
-   do NOT diff silently. Show the date of the branch's last commit
-   (`git log -1 --format=%cd origin/<branch>`) and warn: "the clone may be
-   stale, run `git fetch --all` locally." Let the user decide.
+## Branch freshness (before diffing)
 
-⚠️ Lesson from practice: a silent diff against a stale local snapshot produces
-false conclusions (e.g. "the events are not in the branch," when in fact they were merged in after the snapshot).
+1. Try `git fetch origin dev <feature-branch>` once.
+2. **Fetch succeeded** → use the fresh `origin/...` refs.
+3. **Fetch failed** (no creds — normal in the Cowork sandbox): do NOT give up and do
+   NOT diff silently.
+   - If `origin/<branch>` **already exists locally** (the IDE fetched it) → **proceed
+     on that ref** and note the branch's last-commit date so the user can judge
+     staleness (`git log -1 --format=%cd origin/<branch>`).
+   - If `origin/<branch>` is **absent** → stop and give ONE precise instruction:
+     "In your local `vpn-super-android` clone run `git fetch origin <branch>` (no
+     checkout needed), then say continue." Do not ask them to switch branches.
 
-## Code access
-
-- The repository is available in the session via GitHub Integration (repo/branch/PR
-  selection in Claude Code remote sessions) or a mounted project folder.
-- All git operations are read-only. Do not switch branches, do not run
-  commit/checkout/reset/push.
+⚠️ Lesson from practice: a silent diff against a stale local snapshot produces false
+conclusions (e.g. "the events are not in the branch," when they were merged in after
+the snapshot). Fully hands-off fetching only works in **Claude Code** (it uses your
+git credentials); the Cowork sandbox can read local refs but cannot fetch from GitHub.

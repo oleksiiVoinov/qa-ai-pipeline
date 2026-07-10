@@ -23,7 +23,7 @@ as "everything is safe". A clean report does not mean "nothing broke".
 
 The `vpn-super-android` repository is needed. If it is not available —
 **request access to the project folder** and wait for it to connect (or GitHub
-Integration in a remote session). All git operations are read-only. The base is
+Integration in a remote session). All git operations are read-only. In Cowork there is NO callable git/GitHub connector — go straight to the connected `vpn-super-android` folder's local git, do NOT wait for a connector. NEVER checkout; resolve the branch as `origin/<branch>` and diff merge-base..origin/<branch> (see `standards/repo-config.md`). The base is
 `dev` (see `standards/repo-config.md`).
 
 ## Clone freshness
