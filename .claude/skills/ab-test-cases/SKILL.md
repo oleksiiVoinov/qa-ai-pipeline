@@ -205,7 +205,7 @@ At the top of the file, fill in the coverage table with the full chain
 At the end — the raw requirements section and a self-check list for cross-checks.
 
 Save the result to `runs/<TICKET>/<TICKET>_04_test-cases.md` inside the connected
-`qa-ai-pipeline` project folder (create the folder if needed; not a temp folder) —
+Shiva project folder (create the folder if needed; not a temp folder) —
 e.g. `runs/AB-3107/AB-3107_04_test-cases.md`. This is the input for the next skill
 and/or for import into Testomatio.
 

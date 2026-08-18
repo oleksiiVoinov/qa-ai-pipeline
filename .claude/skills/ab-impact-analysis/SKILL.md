@@ -82,7 +82,7 @@ each: why it is at risk, what to recheck, whether there is automated coverage.
 Plus sections "Missed by the developer", "Claimed but not visible", "Blind spots".
 
 Save to `runs/<TICKET>/<TICKET>_07_impact-analysis.md` inside the connected
-`qa-ai-pipeline` project folder (create the folder if needed; not a temp folder).
+Shiva project folder (create the folder if needed; not a temp folder).
 Input for the final manual checks.
 
 ## Hard rules

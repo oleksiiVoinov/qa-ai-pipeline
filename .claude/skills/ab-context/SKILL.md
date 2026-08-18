@@ -123,7 +123,7 @@ Don't draw conclusions about quality and don't propose checks — that's skill 2
 ## Step 5. Output format
 
 Use the template `templates/context.md`. Save to
-`runs/<TICKET>/<TICKET>_01_context.md` inside the connected `qa-ai-pipeline` project
+`runs/<TICKET>/<TICKET>_01_context.md` inside the connected Shiva project
 folder (create `runs/<TICKET>/` if it doesn't exist) — e.g.
 `runs/AB-3107/AB-3107_01_context.md`. Not a temp/scratchpad folder; then show the
 saved path to the user.

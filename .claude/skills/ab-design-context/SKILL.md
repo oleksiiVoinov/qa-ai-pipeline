@@ -118,7 +118,7 @@ These become questions for skill 2 / notes for review — quote both sides.
 ## Step 4. Output format
 
 Use the template `templates/design-context.md`. Save to
-`runs/<TICKET>/<TICKET>_01b_design.md` inside the connected `qa-ai-pipeline` project
+`runs/<TICKET>/<TICKET>_01b_design.md` inside the connected Shiva project
 folder (create the folder if needed; not a temp folder). Structure:
 - **Source**: file key, page, node-ids, the Figma link(s), source language.
 - **Screens**: one block per screen — name, node-id, screenshot reference, states,

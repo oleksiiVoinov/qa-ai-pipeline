@@ -107,7 +107,7 @@ Use the template `templates/checklist.md`. Structure:
 - A "Raw / unclear requirements" section.
 - A self-check list for cross-checks.
 
-Save to `runs/<TICKET>/<TICKET>_03_checklist.md` inside the connected `qa-ai-pipeline`
+Save to `runs/<TICKET>/<TICKET>_03_checklist.md` inside the connected Shiva
 project folder (create the folder if needed; not a temp folder) — e.g.
 `runs/AB-3107/AB-3107_03_checklist.md`.
 This is a standalone artifact AND the input for skill 4.

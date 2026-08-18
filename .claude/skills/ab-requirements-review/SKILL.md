@@ -107,7 +107,7 @@ After the human answers, assemble a single list of requirements:
 ## Output format
 
 Template `templates/requirements.md`. Save to
-`runs/<TICKET>/<TICKET>_02_requirements.md` inside the connected `qa-ai-pipeline`
+`runs/<TICKET>/<TICKET>_02_requirements.md` inside the connected Shiva
 project folder (create the folder if needed; not a temp folder).
 Stage 1 fills the upper sections; Stage 2 — the final `REQ-N` list.
 This file is the input for skills 3 and 4 (alongside the context).

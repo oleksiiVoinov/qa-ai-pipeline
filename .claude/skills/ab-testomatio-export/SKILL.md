@@ -80,7 +80,7 @@ Preserve the terminology and values verbatim (events, flags, numbers).
 
 ### Step 5. Log
 Produce a local log `runs/<TICKET>/<TICKET>_09_testomatio-export.md` (in the connected
-`qa-ai-pipeline` project folder, create the folder if needed): link to the suite, the
+Shiva project folder, create the folder if needed): link to the suite, the
 list of created cases (id + manual/automated status), what was skipped.
 
 ### Step 6. Return links to the user

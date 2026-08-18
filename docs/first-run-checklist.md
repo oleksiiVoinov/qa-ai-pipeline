@@ -4,8 +4,8 @@ A short setup list so a run works and its results actually land in the project.
 
 ## One-time setup
 
-1. **Get the project.** Clone or `git pull` the `qa-ai-pipeline` repo to your computer.
-2. **Connect the folder in Cowork.** Select the `qa-ai-pipeline` folder as your
+1. **Get the project.** Clone or `git pull` the `qa-ai-pipeline-android` repo to your computer.
+2. **Connect the folder in Cowork.** Select the `qa-ai-pipeline-android` folder as your
    working folder, so Shiva can save results into it.
 3. **No manual install needed.** The skills live in `.claude/skills/` inside the repo
    and are auto-discovered once the folder is connected (step 2). To get updates, just

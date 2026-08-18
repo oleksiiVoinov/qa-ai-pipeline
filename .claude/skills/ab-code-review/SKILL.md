@@ -90,7 +90,7 @@ work, not green noise. For each FAIL and N/A an explanation is mandatory; each
 PASS — with a reference to the code.
 
 Save to `runs/<TICKET>/<TICKET>_06_code-review.md` inside the connected
-`qa-ai-pipeline` project folder (create the folder if needed; not a temp folder).
+Shiva project folder (create the folder if needed; not a temp folder).
 Input for manual checks (the final step):
 the human finishes off FAIL, N/A, and all QA items.
 

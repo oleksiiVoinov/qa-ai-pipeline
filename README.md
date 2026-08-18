@@ -8,7 +8,7 @@ A Claude-based AI pipeline for testing tickets (Android VPN project, AB). A chai
 of narrow skills where the output of each step (an MD file) becomes the input to the next, with
 a human controller standing between the steps.
 
-_Repository: `qa-ai-pipeline` · Project code name: **Shiva**._
+_Repository: `qa-ai-pipeline-android` · Project code name: **Shiva**._
 
 ## Quick start
 
@@ -34,7 +34,7 @@ Both do the same thing: run the entry-point skill (`shiva-run`, `.claude/skills/
 which drives the default chain with human checkpoints. It never executes tests or
 touches the automation repo.
 
-Results are saved into the connected `qa-ai-pipeline` folder under
+Results are saved into the connected Shiva project folder (`qa-ai-pipeline-android`) under
 `runs/<TICKET>/` (e.g. `runs/AB-1234/AB-1234_03_checklist.md`). The folder is created
 if missing; its contents are git-ignored (local-only), so a fresh clone starts with
 an empty `runs/`.

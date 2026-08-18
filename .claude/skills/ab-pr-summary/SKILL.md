@@ -110,7 +110,7 @@ about where to look more carefully during code review.
 ## Output format
 
 Template `templates/pr-summary.md`. Save to
-`runs/<TICKET>/<TICKET>_05_pr-summary.md` inside the connected `qa-ai-pipeline`
+`runs/<TICKET>/<TICKET>_05_pr-summary.md` inside the connected Shiva
 project folder (create the folder if needed; not a temp folder).
 This is input for skill 6 (code review) and skill 7 (impact analysis).
 

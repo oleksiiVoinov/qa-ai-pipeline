@@ -160,7 +160,8 @@ After each step, show the artifact and let the user say "ok / redo" before movin
 
 ## Where artifacts are saved (do NOT skip)
 
-All artifacts go into the **connected `qa-ai-pipeline` project folder**, in
+All artifacts go into the **connected Shiva project folder** (the repo folder that
+holds `standards/` and `templates/` — e.g. `qa-ai-pipeline-android`), in
 `runs/<TICKET>/` — e.g. `runs/AB-3271/AB-3271_01_context.md`. Rules:
 
 - Save into the **mounted project folder the user selected**, NOT a temporary /
